@@ -1,0 +1,91 @@
+{
+  "version": "2.0",
+  "session_isolation": true,
+  "schema_description": "Ralph-style independent context windows architecture",
+
+  "current_phase": "init",
+  "phase_status": {
+    "plan": "pending",
+    "execute": "pending",
+    "verify": "pending"
+  },
+
+  "prd": {
+    "version": "1.0",
+    "requirement_type": "new",
+    "created_at": null,
+    "updated_at": null,
+    "file_path": ".research/task_plan.md"
+  },
+
+  "user_approvals": {
+    "prd_approval": {
+      "approved": false,
+      "approved_at": null,
+      "version": null
+    },
+    "source_audit_approval": {
+      "approved": false,
+      "approved_at": null
+    }
+  },
+
+  "graphiti": {
+    "service_checked": false,
+    "knowledge_loaded": false,
+    "nodes_found": 0,
+    "facts_found": 0,
+    "reused_topics": [],
+    "new_topics": []
+  },
+
+  "topics": [],
+
+  "plan": {
+    "started_at": null,
+    "completed_at": null,
+    "topics_defined": 0,
+    "sources_specified": 0
+  },
+
+  "execute": {
+    "started_at": null,
+    "completed_at": null,
+    "current_step": null,
+    "subagent_status": {},
+    "findings_count": 0,
+    "phase_3_complete": false,
+    "phase_3_5_complete": false,
+    "phase_4_complete": false,
+    "phase_5_complete": false
+  },
+
+  "verify": {
+    "started_at": null,
+    "completed_at": null,
+    "iteration": 0,
+    "max_iterations": 5,
+    "pass_rate": 0,
+    "exit_signal": false,
+    "status": "pending",
+    "checks": {
+      "timeliness": { "passed": 0, "failed": 0, "total": 0 },
+      "completeness": { "passed": 0, "failed": 0, "total": 0 },
+      "accuracy": { "passed": 0, "failed": 0, "total": 0 },
+      "citation": { "passed": 0, "failed": 0, "total": 0 }
+    },
+    "failed_items": [],
+    "fixed_items": []
+  },
+
+  "graphiti_persist": {
+    "facts_stored": 0,
+    "episodes_created": 0,
+    "completed_at": null
+  },
+
+  "session_history": [],
+
+  "last_session_id": null,
+  "last_updated": null
+}

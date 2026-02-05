@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "多终端 Worktree 注册表模板",
+
+  "hub_path": "",
+  "created_at": "",
+  "last_updated": "",
+
+  "worktrees": [
+    {
+      "name": "topic-name",
+      "path": "../worktree-topic-name",
+      "branch": "research-topic-name",
+      "status": "created",
+      "created_at": "",
+      "started_at": null,
+      "completed_at": null,
+      "findings_file": ".research/findings/topic-name.md",
+      "error": null
+    }
+  ],
+
+  "merge_config": {
+    "auto_detect_conflicts": true,
+    "conflict_types": [
+      "time_conflict",
+      "info_conflict",
+      "prerequisite_conflict"
+    ],
+    "cross_validation": true,
+    "generate_comparison_table": true
+  },
+
+  "status_mapping": {
+    "created": "⏳ 已创建，待开始",
+    "in_progress": "🔄 调研进行中",
+    "completed": "✅ 调研已完成",
+    "failed": "❌ 调研失败",
+    "merged": "📦 已合并"
+  }
+}

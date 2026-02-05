@@ -1,0 +1,72 @@
+{
+  "$schema": "https://code.claude.com/schemas/mcp.json",
+  "description": "Graphiti MCP 配置 - 用于零幻觉调研的持久化记忆",
+
+  "graphiti": {
+    "command": "python",
+    "args": ["-m", "graphiti.mcp_server"],
+    "type": "stdio",
+    "disabled": false,
+    "env": {
+      "GRAPHITI_DB_TYPE": "kuzu",
+      "GRAPHITI_DB_PATH": "${HOME}/.claude/graphiti-db",
+      "GRAPHITI_LLM_PROVIDER": "anthropic",
+      "GRAPHITI_EMBEDDING_MODEL": "text-embedding-3-small"
+    },
+    "description": "Graphiti 时序知识图谱 - 存储已验证的调研事实"
+  },
+
+  "_comments": {
+    "database_options": {
+      "local_dev": {
+        "GRAPHITI_DB_TYPE": "kuzu",
+        "GRAPHITI_DB_PATH": "${HOME}/.claude/graphiti-db",
+        "description": "本地开发使用，无需外部数据库"
+      },
+      "production_neo4j": {
+        "GRAPHITI_DB_TYPE": "neo4j",
+        "GRAPHITI_DB_URL": "neo4j://localhost:7687",
+        "GRAPHITI_DB_USER": "neo4j",
+        "GRAPHITI_DB_PASSWORD": "${NEO4J_PASSWORD}",
+        "description": "生产环境，多终端共享"
+      },
+      "production_falkordb": {
+        "GRAPHITI_DB_TYPE": "falkordb",
+        "GRAPHITI_DB_URL": "redis://localhost:6379",
+        "description": "高性能生产环境"
+      }
+    },
+    "installation": {
+      "kuzu": "pip install graphiti-core[kuzu]",
+      "neo4j": "pip install graphiti-core[neo4j]",
+      "falkordb": "pip install graphiti-core[falkordb]"
+    }
+  },
+
+  "usage_in_skill": {
+    "add_verified_fact": {
+      "tool": "mcp__graphiti__add_episode",
+      "example": {
+        "topic": "MATH 54",
+        "fact": "教授是 XXX",
+        "source": "https://calcentral.berkeley.edu/...",
+        "verified_at": "2026-01-25 14:00",
+        "confidence": "high"
+      }
+    },
+    "search_existing_facts": {
+      "tool": "mcp__graphiti__search_facts",
+      "example": {
+        "query": "MATH 54 教授",
+        "limit": 10
+      }
+    },
+    "check_conflicts": {
+      "tool": "mcp__graphiti__search_nodes",
+      "example": {
+        "query": "conflicts_with",
+        "node_type": "Fact"
+      }
+    }
+  }
+}

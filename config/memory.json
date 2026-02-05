@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "description": "三层记忆系统配置",
+
+  "memory_layers": {
+    "priority": {
+      "file": ".research/memory/priority.md",
+      "description": "优先上下文 - 每次启动必读",
+      "auto_load": true,
+      "max_size_tokens": 2000,
+      "retention": "permanent",
+      "contents": [
+        "核心需求",
+        "验收标准",
+        "关键约束",
+        "用户指定来源列表"
+      ]
+    },
+
+    "working": {
+      "file": ".research/memory/working.md",
+      "description": "工作记忆 - 本次调研的关键发现",
+      "auto_load": true,
+      "max_size_tokens": 5000,
+      "retention": "7_days",
+      "auto_cleanup": true,
+      "contents": [
+        "已验证的事实",
+        "存在冲突的信息",
+        "待用户确认的内容",
+        "调研进度摘要"
+      ]
+    },
+
+    "permanent": {
+      "file": ".research/memory/permanent.md",
+      "description": "永久笔记 - 已验证的结论和历史教训",
+      "auto_load": false,
+      "max_size_tokens": 10000,
+      "retention": "permanent",
+      "contents": [
+        "已验证的最终结论",
+        "历史调研中的教训",
+        "来源可靠性评估记录"
+      ]
+    }
+  },
+
+  "auto_save": {
+    "enabled": true,
+    "trigger": "every_2_operations",
+    "save_to": [
+      ".research/task_plan.md",
+      ".research/memory/working.md"
+    ]
+  },
+
+  "context_management": {
+    "max_context_usage_percent": 80,
+    "on_context_overflow": "summarize_and_save",
+    "priority_on_reload": [
+      "priority",
+      "working"
+    ]
+  },
+
+  "subagent_isolation": {
+    "enabled": true,
+    "each_subagent_context": "independent_200k",
+    "share_between_subagents": false,
+    "return_to_main": "summary_only"
+  },
+
+  "hallucination_prevention": {
+    "require_source_for_facts": true,
+    "require_timestamp_for_facts": true,
+    "require_reasoning_for_inference": true,
+    "require_explanation_for_unverified": true,
+    "source_types": {
+      "user_specified": "📌",
+      "ai_discovered": "🔍"
+    },
+    "fact_tags": {
+      "verified": "[事实]",
+      "inferred": "[推理]",
+      "unverified": "[未验证]"
+    }
+  },
+
+  "incremental_requirements": {
+    "on_new_discovery": "pause_and_ask",
+    "append_to": ".research/task_plan.md",
+    "section": "增量需求记录"
+  },
+
+  "checkpoint": {
+    "enabled": true,
+    "state_file": ".research/state.json",
+    "save_on": [
+      "phase_change",
+      "subagent_complete",
+      "user_confirmation",
+      "error"
+    ],
+    "auto_resume": true
+  }
+}
